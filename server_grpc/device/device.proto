@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option go_package = "go-gnet/server_grpc/device";
+
+package device;
+
+service RouteGuide {
+    rpc GetDeviceStatus (stream DeviceId) returns (stream DeviceStatus) {}
+    rpc GetDeviceConfig (DeviceId) returns (DeviceConfig) {}
+    rpc SetDeviceConfig (DeviceConfig) returns (ReturnValue) {}
+}
+
+message ReturnValue {
+    int64 ret = 1;
+}
+
+message DeviceId {
+    uint64 id = 1;
+}
+
+message DeviceStatus {
+    uint64 id = 1;
+    uint64 status = 2;
+}
+
+message DeviceConfig {
+    uint64 id = 1;
+    string content = 2;
+}
